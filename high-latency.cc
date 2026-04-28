@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 
@@ -15,7 +16,7 @@ NS_LOG_COMPONENT_DEFINE("HighLatencyTcpVsUdp");
 
 int main(int argc, char* argv[])
 {
-    double simulationTime = 30.0;
+    double simulationTime = 20.0;
     uint32_t payloadSize = 1024;
 
     NodeContainer nodes;
@@ -160,7 +161,7 @@ int main(int argc, char* argv[])
         }
 
 
-        if (throughputKbps != 0)
+	if (throughputKbps != 0)
         csvFile << protocolName << ","
                 << t.sourceAddress << ","
                 << t.destinationAddress << ","
