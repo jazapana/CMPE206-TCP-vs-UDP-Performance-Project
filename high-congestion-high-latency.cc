@@ -12,15 +12,15 @@
 
 using namespace ns3;
 
-NS_LOG_COMPONENT_DEFINE("HighLatencyTcpVsUdp");
+NS_LOG_COMPONENT_DEFINE("HighCongestionHighLatencyTcpVsUdp");
 
 int main(int argc, char* argv[])
 {
-	std::string latency[4] = {"2ms", "50ms", "200ms", "400ms"}; //link latency
+	std::string dataRates[4] = {"1Mbps", "2Mbps", "3Mbps", "4Mbps"}; //Mbps for TCP and UDP Sinks
 	// Open csvFile
 	std::ofstream csvFile;
-	csvFile.open("high-latency-output.csv");
-	csvFile << "Protocol,SourceAddress,DestinationAddress,SourcePort,DestinationPort,Latency,"
+	csvFile.open("high-congestion-high-latency-output.csv");
+	csvFile << "Protocol,SourceAddress,DestinationAddress,SourcePort,DestinationPort,Mbps,"
 	           "TxPackets,RxPackets,LostPackets,TxBytes,RxBytes,ThroughputKbps,"
 	           "MeanDelayMs,MeanJitterMs\n";
 	for(int i = 0; i < 4; i++){
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 
 	    PointToPointHelper pointToPoint;
 	    pointToPoint.SetDeviceAttribute("DataRate", StringValue("4Mbps"));
-	    pointToPoint.SetChannelAttribute("Delay", StringValue(latency[i]));
+	    pointToPoint.SetChannelAttribute("Delay", StringValue("400ms"));
 
 	    NetDeviceContainer devices01t = pointToPoint.Install(nodes.Get(0), nodes.Get(1));
 	    NetDeviceContainer devices12t = pointToPoint.Install(nodes.Get(1), nodes.Get(2));
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	    tcpSender.SetAttribute("OffTime",
 	                           StringValue("ns3::ConstantRandomVariable[Constant=0]"));
 	    tcpSender.SetAttribute("PacketSize", UintegerValue(payloadSize));
-	    tcpSender.SetAttribute("DataRate", StringValue("3Mbps"));
+	    tcpSender.SetAttribute("DataRate", StringValue(dataRates[i]));
 	    tcpSender.SetAttribute("MaxBytes", UintegerValue(0));
 
 	    InetSocketAddress tcpRemote(interfaces12t.GetAddress(1), tcpPort);
@@ -95,7 +95,7 @@ int main(int argc, char* argv[])
 	    udpSender.SetAttribute("OffTime",
 	                           StringValue("ns3::ConstantRandomVariable[Constant=0]"));
 	    udpSender.SetAttribute("PacketSize", UintegerValue(payloadSize));
-	    udpSender.SetAttribute("DataRate", StringValue("3Mbps"));
+	    udpSender.SetAttribute("DataRate", StringValue(dataRates[i]));
 	    udpSender.SetAttribute("MaxBytes", UintegerValue(0));
 
 	    InetSocketAddress udpRemote(interfaces12t.GetAddress(1), udpPort);
@@ -169,7 +169,7 @@ int main(int argc, char* argv[])
 	                << t.destinationAddress << ","
 	                << t.sourcePort << ","
 	                << t.destinationPort << ","
-			<< latency[i] << ","
+			<< dataRates[i] << ","
 	                << flowStats.txPackets << ","
 	                << flowStats.rxPackets << ","
 	                << flowStats.lostPackets << ","
