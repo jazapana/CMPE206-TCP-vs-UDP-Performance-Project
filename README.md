@@ -8,15 +8,23 @@ The following experiments were implemented:
 
 1. Transfer Size Experiment
    - Compared TCP and UDP under different transfer sizes
+   - `.cc` and `.csv` files are found in `/transfer-size`
 
 2. Latency Experiment
    - Compared TCP and UDP under different latency values
+   - `.cc` and `.csv` files are found in `/high-latency`
 
 3. Low Latency Congestion Experiment
    - Tested congestion behavior under low latency
+   - `.cc` and `.csv` files are found in `/high-congestion-low-latency`
 
 4. High Latency Congestion Experiment
    - Tested congestion behavior under high latency
+   - `.cc` and `.csv` files are found in `/high-congestion-high-latency`
+
+The graphs and tables are found in:
+- `TCP_vs_UDP_Transfer_Size.ipynb`
+- `LatencyCongestionCharts.ipynb`
 
 ## Metrics Collected
 The following metrics were collected:
