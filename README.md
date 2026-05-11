@@ -37,12 +37,18 @@ The following metrics were collected:
 
 ## Technologies Used
 - GitHub
-- NS-3: Main network simulation framework
-- PointToPointHelper: Creates links between nodes
-- OnOffHelper: Generates TCP/UDP traffic
-- PacketSinkHelper: Creates TCP/UDP receivers
-- FlowMonitor: Collects metrics
-- Google Colab: Graphs and tables
+- NS-3:
+   - Main network simulation framework
+- PointToPointHelper:
+   - Creates links between nodes
+- OnOffHelper:
+   - Generates TCP/UDP traffic
+- PacketSinkHelper:
+   - Creates TCP/UDP receivers
+- FlowMonitor:
+   - Collects metrics
+- Google Colab:
+   - Graphs and tables
 
 ## Authors
 - Tyler Jones
